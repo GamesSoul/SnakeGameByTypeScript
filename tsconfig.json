@@ -1,0 +1,12 @@
+{
+  "include": [ "src/**/*" ],
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "esnext",
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}

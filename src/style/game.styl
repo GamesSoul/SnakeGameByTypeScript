@@ -1,0 +1,94 @@
+globalColor = #fff
+gameWidowWidth = calc(100% - 22px)
+snakeAndFoodWH($width, $height)
+  width $width
+  height $height
+  position absolute
+  top 0
+  left 0
+foodPseudoClassStyle($height = 10px)
+  content: ''
+  display block
+  border-top 2px solid globalColor
+  border-bottom 2px solid globalColor
+  height ($height / 2 - 2)
+scroeBoardTitleStyle()
+  content attr(id)':'
+
+#main
+  width 400px
+  height 450px
+  border 5px solid globalColor
+  border-radius 10px
+  display flex
+  flex-flow row wrap
+  justify-content center
+  align-content space-around
+#game-window
+  width gameWidowWidth
+  height 402px
+  border 1px solid globalColor
+  position relative
+  overflow hidden
+  #snake-box>.snake-body
+    snakeAndFoodWH(10px, 10px)
+    background globalColor
+    border 1px solid #000
+    transition top,left .2s
+    &:nth-of-type(1)
+      left 20px
+    &:nth-of-type(2)
+      left 10px
+  #food
+    snakeAndFoodWH(10px, 10px)
+    left 40px
+    top 100px
+    &:before
+      foodPseudoClassStyle(10px)
+      transform scale(.8) translateY(25%)
+    &:after
+      foodPseudoClassStyle(10px)
+      transform scale(.8) rotate(90deg) translate(-70%)
+  #controlGame
+    position absolute
+    left 0
+    top 0
+    width 100%
+    height 100%
+    background darken(#000, .5)
+    font-family Arial, Helvetica, sans-serif
+    display flex
+    flex-wrap wrap
+    justify-content center
+    align-items center
+    &>a
+      color globalColor
+      display block
+      text-align center
+      font-size 24px
+      animation fontColorChange 1.5s linear infinite
+    #restart
+      display none
+#score-board
+  display flex
+  width gameWidowWidth
+  justify-content space-between
+  font-family Arial, Helvetica, sans-serif
+  font-size 14px
+  color globalColor
+  #score
+    &:before
+      scroeBoardTitleStyle()
+  #level
+    &:before
+      scroeBoardTitleStyle()
+
+@keyframes fontColorChange {
+  0%,100%{
+    color globalColor
+  }
+  50% {
+    color transparent
+    text-shadow globalColor 0 0 5px
+  }
+}
