@@ -25,4 +25,11 @@ jobs:
     - name: Build
       run: |
         yarn install
-        npx webpack
+        npm run build  # 运行构建命令
+ 
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/master'  # 仅当推送到main分支时部署
+      uses: peaceiris/actions-gh-pages@v3  # 使用GitHub Pages部署动作
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub的token进行认证
+        publish_dir: ./dist  # 指定构建产物的目录，例如React的build目录
