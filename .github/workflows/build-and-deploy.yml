@@ -1,0 +1,32 @@
+name: Build and Deploy Frontend
+ 
+on:
+  push:
+    branches:
+      - main  # 当main分支有更新时触发
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 使用Ubuntu最新版本运行环境
+ 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # 检出代码
+ 
+    - name: Set up Node.js
+      uses: actions/setup-node@v2  # 设置Node.js环境
+      with:
+        node-version: '14'  # 使用Node.js的版本14
+ 
+    - name: Install dependencies
+      run: npm ci  # 安装依赖，使用npm ci以确保依赖的一致性
+ 
+    - name: Build project
+      run: npm run build  # 运行构建命令
+ 
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'  # 仅当推送到main分支时部署
+      uses: peaceiris/actions-gh-pages@v3  # 使用GitHub Pages部署动作
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub的token进行认证
+        publish_dir: ./build  # 指定构建产物的目录，例如React的build目录
