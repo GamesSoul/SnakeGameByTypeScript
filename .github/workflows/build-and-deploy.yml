@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2  # 设置Node.js环境
       with:
-        node-version: '14'  # 使用Node.js的版本14
+        node-version: '18'  # 使用Node.js的版本14
  
     - name: Install dependencies
       run: npm ci  # 安装依赖，使用npm ci以确保依赖的一致性
